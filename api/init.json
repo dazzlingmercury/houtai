@@ -1,0 +1,139 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "page/welcome-1.html?t=1"
+  },
+  "logoInfo": {
+    "title": "乐学自习室后台",
+    "image": "images/logo.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "常规管理",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "概况",
+          "href": "page/wait.html",
+          "icon": "fa fa-bar-chart-o",
+          "target": "_self"
+        },
+        {
+          "title": "会员",
+          "href": "",
+          "icon": "fa fa-user",
+          "target": "_self",
+          "child": [
+            {
+              "title": "会员列表",
+              "href": "page/table.html",
+              "icon": "",
+              "target": "_self"
+            },
+            {
+              "title": "会员充值",
+              "href": "page/table2.html",
+              "icon": "",
+              "target": "_self"
+            },
+            {
+              "title": "会员消费",
+              "href": "page/wait.html",
+              "icon": "",
+              "target": "_self"
+            },
+            {
+              "title": "散客消费",
+              "href": "page/wait.html",
+              "icon": "",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "套餐",
+          "href": "",
+          "icon": "fa fa-window-maximize",
+          "target": "_self",
+          "child": [
+            {
+              "title": "套餐列表",
+              "href": "page/commodity.html",
+              "icon": "",
+              "target": "_self"
+            },
+            {
+              "title": "套餐管理",
+              "href": "page/wait.html",
+              "icon": "",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "订单管理",
+          "href": "page/wait.html",
+          "icon": "fa fa-navicon",
+          "target": "_self"
+        },
+        {
+          "title": "支出",
+          "href": "",
+          "icon": "fa fa-jpy",
+          "target": "_self",
+          "child": [
+            {
+              "title": "支出录入",
+              "href": "page/wait.html",
+              "icon": "",
+              "target": "_self"
+            },
+            {
+              "title": "支出明细",
+              "href": "page/wait.html",
+              "icon": "",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "分析",
+          "href": "",
+          "icon": "fa fa-line-chart",
+          "target": "_self",
+          "child": [
+            {
+              "title": "套餐",
+              "href": "page/wait.html",
+              "icon": "",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "权限管理",
+          "href": "",
+          "icon": "fa fa-cogs",
+          "target": "_self",
+          "child": [
+            {
+              "title": "管理员列表",
+              "href": "page/wait.html",
+              "icon": "",
+              "target": "_self"
+            },
+            {
+              "title": "用户组列表",
+              "href": "page/wait.html",
+              "icon": "",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

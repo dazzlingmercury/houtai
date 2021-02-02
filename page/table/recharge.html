@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form layuimini-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label required">ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="id" name="id" lay-verify="required" class="layui-input" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">姓名</label>
+        <div class="layui-input-block">
+            <input type="text" id="username" name="username" lay-verify="required" lay-reqtext="姓名不能为空"
+                   placeholder="请输入姓名" class="layui-input" disabled>
+            <tip>填写真实姓名</tip>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">性别</label>
+        <div class="layui-input-block">
+            <input type="radio" name="sex" id="sex_male" value="男" title="男" checked="" disabled>
+            <input type="radio" name="sex" id="sex_female" value="女" title="女" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">手机</label>
+        <div class="layui-input-block">
+            <input type="number" id="telephone" name="telephone" lay-verify="required" lay-reqtext="手机号码不能为空"
+                   placeholder="请输入手机" class="layui-input" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">请选择充值套餐</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodity" name="commodity" lay-verify="required" lay-reqtext="套餐不为空"
+                   placeholder="请选择套餐" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认充值</button>
+        </div>
+    </div>
+</div>
+</div>
+<script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+
+<script>
+    var url = 'http://122.14.253.88:20783'
+    // var url = 'http://127.0.0.1:8000'
+    token = window.localStorage.getItem('JQ_token');
+    layui.use(['form', 'tableSelect'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+        var tableSelect = layui.tableSelect;
+        tableSelect.render({
+            elem: '#commodity',
+            checkedKey: 'id',
+            table: {
+                url: url + '/v1/commodity/commodity_list',
+                headers: {'Authorization': token},
+                cols: [[
+                    {type: "radio", width: 50, align: "center"},
+                    {field: 'id', width: 80, title: '卡号', sort: true, align: "center"},
+                    {field: 'name', width: 100, title: '卡名称', align: "center", sort: true},
+                    {field: 'money', width: 100, title: '卡金额', sort: true, align: "center"},
+                    {field: 'gaveMoney', width: 100, title: '赠送金额', align: "center"},
+                    {field: 'frequency', width: 120, title: '卡次数', sort: true, align: "center"},
+                    {field: 'mode', width: 160, title: '使用说明', align: "center"},
+                ]]
+            },
+            done: function (elem, data) {
+                var NEWJSON = []
+                layui.each(data.data, function (index, item) {
+                    NEWJSON.push("卡号:" + item.id + "---套餐类型:" + item.name + "---充值金额:" + item.money)
+                })
+                elem.val(NEWJSON.join(","))
+            }
+        })
+        layui.config({
+            base: '../../js/'
+        }).use(['myModule'], function () {
+            var myModule = layui.myModule;
+            form.on('submit(saveBtn)', function (data) {
+                var data = JSON.stringify(data.field)
+                layer.confirm('是否充值', {icon: 3, title: '提示'}, function () {
+                    var success = 'layer.msg(\'充值成功\', {\n' +
+                        '                                time: 1000, icon: 6, end: function () {\n' +
+                        '                                    parent.location.reload();\n' +
+                        '                                }\n' +
+                        '                            })'
+
+                    myModule.myAjax('post', '/v1/commodity/recharge', data, success)
+                    return false
+                })
+            })
+        })
+
+
+    });
+
+
+</script>
+</body>
+</html>
